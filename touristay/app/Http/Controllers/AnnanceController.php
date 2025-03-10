@@ -39,6 +39,9 @@ class AnnanceController extends Controller
             'image1' => 'required|url',
             'image2' => 'url|nullable',
             'image3' => 'url|nullable',
+            'occupee1' => 'required',
+            'occupee2' => 'required',
+        
         ]);
         $id = Auth()->user()->id; 
 
@@ -54,6 +57,8 @@ class AnnanceController extends Controller
             'image3' => $valable['image3'],
             'adresse' => $valable['adresse'],
             'equipement' => $valable['equipement'],
+            'occupee1' => $valable['occupee1'],
+            'occupee2' => $valable['occupee2'],
         ]);
 
         return redirect()->route('proprietaire')->with('success','bien ajouté');         
@@ -73,4 +78,15 @@ class AnnanceController extends Controller
             return view('EditAnnance',compact('annance'));
 
         }
+    
+        public function show($id)
+        {
+            $dateRange = Annance::findOrFail($id);
+            return view('annanceDetaille', compact('dateRange'));
+        }
+
+ 
+
+
+
 }
